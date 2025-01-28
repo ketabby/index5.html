@@ -71,9 +71,21 @@
             background-color: #ff9999;
             padding: 10px;
             box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+        }
+        .sidebar.left {
+            left: 0;
+        }
+        .sidebar.right {
+            right: 0;
         }
         .content {
-            width: 60%;
+            flex: 1;
+            margin-left: 4cm;
+            margin-right: 4cm;
             padding: 10px;
             background-color: #e6ccff; /* Light purple background color */
         }
@@ -108,42 +120,42 @@
     <div class="header">
         <nav>
             <ul>
-                <li>Section 1
+                <li class="section-label">Section 1
                     <ul>
                         <li>Subsection 1.1</li>
                         <li>Subsection 1.2</li>
                         <li>Subsection 1.3</li>
                     </ul>
                 </li>
-                <li>Section 2
+                <li class="section-label">Section 2
                     <ul>
                         <li>Subsection 2.1</li>
                         <li>Subsection 2.2</li>
                         <li>Subsection 2.3</li>
                     </ul>
                 </li>
-                <li>Section 3
+                <li class="section-label">Section 3
                     <ul>
                         <li>Subsection 3.1</li>
                         <li>Subsection 3.2</li>
                         <li>Subsection 3.3</li>
                     </ul>
                 </li>
-                <li>Section 4
+                <li class="section-label">Section 4
                     <ul>
                         <li>Subsection 4.1</li>
                         <li>Subsection 4.2</li>
                         <li>Subsection 4.3</li>
                     </ul>
                 </li>
-                <li>Section 5
+                <li class="section-label">Section 5
                     <ul>
                         <li>Subsection 5.1</li>
                         <li>Subsection 5.2</li>
                         <li>Subsection 5.3</li>
                     </ul>
                 </li>
-                <li>Section 6
+                <li class="section-label">Section 6
                     <ul>
                         <li>Subsection 6.1</li>
                         <li>Subsection 6.2</li>
@@ -157,7 +169,7 @@
         <p>Breaking News: Welcome to our new website!</p>
     </div>
     <div class="main">
-        <div class="sidebar">
+        <div class="sidebar left">
             <ul>
                 <li>Sidebar Section 1</li>
                 <li>Sidebar Section 2</li>
@@ -170,7 +182,7 @@
             <h1>Main Content Area</h1>
             <p>This is where the main content of the page goes.</p>
         </div>
-        <div class="sidebar">
+        <div class="sidebar right">
             <ul>
                 <li>Sidebar Section 1</li>
                 <li>Sidebar Section 2</li>
@@ -195,12 +207,18 @@
                 document.querySelectorAll('*').forEach(el => {
                     el.dir = 'rtl';
                 });
+                document.querySelectorAll('.section-label').forEach(el => {
+                    el.textContent = el.textContent.replace('Section', 'قسم');
+                });
             } else {
                 document.documentElement.lang = 'en';
                 langSwitchButton.textContent = 'Switch to Arabic';
                 document.body.style.direction = 'ltr';
                 document.querySelectorAll('*').forEach(el => {
                     el.dir = 'ltr';
+                });
+                document.querySelectorAll('.section-label').forEach(el => {
+                    el.textContent = el.textContent.replace('قسم', 'Section');
                 });
             }
         }
